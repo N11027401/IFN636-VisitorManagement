@@ -32,6 +32,17 @@ const VisitorManagement = () => {
       alert('Failed to update visitor.');
     }
     };
+
+      const handleDelete = async (id) => {
+    try {
+      await axiosInstance.delete(`/api/visitors/${id}`);
+      setVisitors(visitors.filter((v) => v._id !== id));
+    } catch (error) {
+      alert('Failed to delete visitor.');
+    }
+  };
+
+
     const filteredVisitors = visitors.filter(visitor =>
     visitor.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     visitor.email.toLowerCase().includes(searchQuery.toLowerCase())
@@ -64,6 +75,9 @@ const VisitorManagement = () => {
             <td className="py-2 px-4 border-b">{new Date(visitor.checkinTime).toLocaleString()}</td>
             <button onClick={() => handleEdit(visitor)} className="bg-yellow-500 text-white px-3 py-1 rounded mr-2">
             Edit
+            </button>
+            <button onClick={() => handleDelete(visitor._id)} className="bg-red-500 text-white px-3 py-1 rounded">
+            Delete
             </button>
             </tr>
             ))}
@@ -110,6 +124,7 @@ const VisitorManagement = () => {
                 <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
                 Update
                 </button>
+
               </div>
             </form>
           </div>

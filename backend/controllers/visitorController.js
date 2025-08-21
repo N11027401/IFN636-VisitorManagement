@@ -53,9 +53,26 @@ const updateVisitor = async (req, res) => {
   }
 };
 
+
+const deleteVisitor = async (req, res) => {
+  try {
+    const visitor = await Visitor.findById(req.params.id);
+    if (visitor) {
+      await visitor.remove();
+      res.json({ message: 'Visitor removed' });
+    } else {
+      res.status(404).json({ message: 'Visitor not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   createVisitor,
   getVisitors,
   getVisitor,
   updateVisitor,
+  deleteVisitor,
+
 };
