@@ -5,17 +5,22 @@ import Register from './pages/Register';
 import Profile from './pages/Profile';
 import Tasks from './pages/Tasks';
 import VisitorCheckin from './pages/VisitorCheckin';
-
+import VisitorManagement from './pages/VisitorManagement';
+import Reauth from './pages/Reauth';
+import Home from './pages/Home';
 
 function App() {
   return (
     <Router>
       <Navbar />
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/tasks" element={<Tasks />} />
+        <Route path="/admin" element={<VisitorManagement />} />
+        <Route path="/reauth" element={<Reauth />} />
         <Route path="/checkin" element={<VisitorCheckin />} />
       </Routes>
     </Router>
