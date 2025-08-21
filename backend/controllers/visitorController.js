@@ -34,9 +34,28 @@ const getVisitor = async (req, res) => {
   }
 };
 
+const updateVisitor = async (req, res) => {
+  try {
+    const { name, email, reason, checkinTime } = req.body;
+    const visitor = await Visitor.findById(req.params.id);
+    if (visitor) {
+      visitor.name = name || visitor.name;
+      visitor.email = email || visitor.email;
+      visitor.reason = reason || visitor.reason;
+      visitor.checkinTime = checkinTime || visitor.checkinTime;
+      const updatedVisitor = await visitor.save();
+      res.json(updatedVisitor);
+    } else {
+      res.status(404).json({ message: 'Visitor not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 module.exports = {
   createVisitor,
   getVisitors,
   getVisitor,
+  updateVisitor,
 };

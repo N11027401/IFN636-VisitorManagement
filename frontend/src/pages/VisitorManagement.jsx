@@ -17,9 +17,11 @@ const VisitorManagement = () => {
       }
     };
     fetchVisitors();
-  }, []);
+    }, []);
 
-
+    const handleEdit = (visitor) => {
+        setEditingVisitor({...visitor});
+    };
     const handleUpdate = async (e) => {
     e.preventDefault();
     try {
@@ -60,6 +62,9 @@ const VisitorManagement = () => {
             <td className="py-2 px-4 border-b">{visitor.email}</td>
             <td className="py-2 px-4 border-b">{visitor.reason}</td>
             <td className="py-2 px-4 border-b">{new Date(visitor.checkinTime).toLocaleString()}</td>
+            <button onClick={() => handleEdit(visitor)} className="bg-yellow-500 text-white px-3 py-1 rounded mr-2">
+            Edit
+            </button>
             </tr>
             ))}
         </tbody>
