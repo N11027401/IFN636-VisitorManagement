@@ -41,13 +41,3 @@ This is a CRUD application designed to  handle visitor check-ins. It features a 
 └── frontend/     # Contains the React application, components, and pages.
 ```
 
-## Setup and Installation
-
-To get this project running locally, follow these steps:
-
-### Prerequisites
-
-*   Node.js and npm installed.
-*   MongoDB installed and running, or a MongoDB Atlas cluster URI.
-
-
