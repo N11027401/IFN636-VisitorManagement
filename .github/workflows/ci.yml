@@ -72,9 +72,3 @@ jobs:
 
     - run: pm2 start all
     - run: pm2 restart all
-
-    - name: Cleanup Runner Workspace
-      if: always() 
-      run: |
-        echo "Cleaning up runner _work directory..."
-        rm -rf ${{ runner.workspace }}/*
