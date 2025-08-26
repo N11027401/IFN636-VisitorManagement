@@ -3,8 +3,7 @@ name: Backend CI
 on:
   push:
     branches:
-      - Main
-      - Tests   
+      - main
 
 jobs:
   test:
@@ -74,7 +73,6 @@ jobs:
     - run: pm2 start all
     - run: pm2 restart all
 
-   
     - name: Cleanup Runner Workspace
       if: always() 
       run: |
