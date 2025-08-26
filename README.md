@@ -2,6 +2,7 @@
 
 ## Description
 JIRA:https://devhburnett.atlassian.net/jira/software/projects/VMS/boards/34
+
 EC2: https://ap-southeast-2.console.aws.amazon.com/ec2/home?region=ap-southeast-2#InstanceDetails:instanceId=i-0fdefdcf1d81ede67
 
 This is a CRUD application designed to  handle visitor check-ins. It features a React frontend that communicates with a Node.js/Express backend, with data stored in a MongoDB database. The system allows for user registration and authentication, and provides separate functionalities for managing tasks and visitors.
