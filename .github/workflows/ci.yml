@@ -3,8 +3,8 @@ name: Backend CI
 on:
   push:
     branches:
-      - '**'  # Trigger CI on pushes to the main branch
-
+      - Main
+      - Tests   
 
 jobs:
   test:
@@ -13,8 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [22] # Test on multiple Node.js versions
-
+        node-version: [22]
 
     environment: MONGO_URI
 
@@ -29,7 +28,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Print Env Secret
-
       env:
         MONGO_URI: ${{ secrets.MONGO_URI }}
         JWT_SECRET: ${{ secrets.JWT_SECRET }}
@@ -45,9 +43,9 @@ jobs:
     - name: Install Backend Dependencies
       working-directory: ./backend
       run: | 
-       npm install --global yarn
-       yarn --version
-       yarn install
+        npm install --global yarn
+        yarn --version
+        yarn install
       
     # Install dependencies for frontend
     - name: Install Frontend Dependencies
@@ -58,7 +56,6 @@ jobs:
         yarn install
         yarn run build
 
-
     # Run backend tests
     - name: Run Backend Tests
       env:
@@ -68,7 +65,6 @@ jobs:
       working-directory: ./backend
       run: npm test
 
-
     - run: npm ci
     - run: | 
         cd ./backend
@@ -76,5 +72,11 @@ jobs:
         echo "${{ secrets.PROD }}" > .env
 
     - run: pm2 start all
-
     - run: pm2 restart all
+
+   
+    - name: Cleanup Runner Workspace
+      if: always() 
+      run: |
+        echo "Cleaning up runner _work directory..."
+        rm -rf ${{ runner.workspace }}/*
